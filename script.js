@@ -527,60 +527,60 @@ if (visitorWidget && widgetToggle && widgetHeader) {
     });
 }
 
-// Google Analytics Verilerini Çekme (Simüle)
-// GERÇEK kullanım için Google Analytics API entegrasyonu gerekir
-// Visitor stats: try to use a PHP endpoint (visitor.php) if available. Fallback to local simulation.
+// Enable debug mode for analytics
+window.DEBUG = true;
+
+// Google Analytics Verilerini Çekme - visitor.php ile
+// VISITOR_ENDPOINT: PHP backend sunucusu ziyaretçi sayacı
 window.VISITOR_ENDPOINT = window.VISITOR_ENDPOINT || 'visitor.php';
 
 function updateVisitorStats() {
-    // increment local pageViews counter
-    let pageViews = parseInt(localStorage.getItem('pageViews') || '0');
-    pageViews++;
-    localStorage.setItem('pageViews', pageViews.toString());
+    // Sayfa ziyareti kaydet
+    try {
+        fetch(window.VISITOR_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                event: 'page_view', 
+                path: window.location.pathname, 
+                href: window.location.href, 
+                ts: Date.now() 
+            })
+        }).catch(e => { if (window.DEBUG) console.debug('visitor post failed', e); });
+    } catch (e) { if (window.DEBUG) console.debug('visitor post exception', e); }
 
-    // Try fetch real stats from server-side endpoint
+    // Gerçek istatistikleri sunucudan çek
     fetch(`${window.VISITOR_ENDPOINT}?action=stats`, { cache: 'no-store' })
         .then(res => {
             if (!res.ok) throw new Error('stats fetch failed');
             return res.json();
         })
         .then(data => {
-            // expected { total: n, today: n, last_updated: 'YYYY-MM-DD' }
+            // Beklenen format: { total: n, today: n, last_updated: 'YYYY-MM-DD' }
             const total = data.total || 0;
             const today = data.today || 0;
-            const active = data.active || 0;
 
             const totalEl = document.getElementById('totalVisitors');
             const todayEl = document.getElementById('todayVisitors');
-            const activeEl = document.getElementById('activeVisitors');
             const pageViewsEl = document.getElementById('pageViews');
 
             if (totalEl) totalEl.textContent = total.toLocaleString('tr-TR');
             if (todayEl) todayEl.textContent = today.toLocaleString('tr-TR');
-            if (activeEl) activeEl.textContent = (active || 0).toLocaleString('tr-TR');
-            if (pageViewsEl) pageViewsEl.textContent = pageViews.toLocaleString('tr-TR');
+            if (pageViewsEl) pageViewsEl.textContent = (total || 0).toLocaleString('tr-TR');
+
+            if (window.DEBUG) console.debug('Analytics loaded:', { total, today });
         })
         .catch(err => {
-            // fallback: avoid showing fake hardcoded numbers; show placeholders so admin can provide real data
-            if (window.DEBUG) console.debug('Visitor stats fetch failed, showing placeholders', err);
+            // Hata durumunda göstergeler göster
+            if (window.DEBUG) console.debug('Visitor stats fetch failed:', err);
             const totalEl = document.getElementById('totalVisitors');
             const todayEl = document.getElementById('todayVisitors');
-            const activeEl = document.getElementById('activeVisitors');
             const pageViewsEl = document.getElementById('pageViews');
+            
             if (totalEl) totalEl.textContent = '—';
             if (todayEl) todayEl.textContent = '—';
-            if (activeEl) activeEl.textContent = '—';
-            if (pageViewsEl) pageViewsEl.textContent = pageViews.toLocaleString('tr-TR');
+            if (pageViewsEl) pageViewsEl.textContent = '—';
         });
-
-    // send a lightweight POST to record page view (best-effort)
-    try {
-        fetch(window.VISITOR_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ event: 'page_view', path: window.location.pathname, href: window.location.href, ts: Date.now() })
-        }).catch(e => { if (window.DEBUG) console.debug('visitor post failed', e); });
-    } catch (e) { if (window.DEBUG) console.debug('visitor post exception', e); }
 }
 
 // Widget verilerini başlat
@@ -784,21 +784,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const btn = document.getElementById('darkModeToggle');
         if (btn) btn.innerHTML = '<i class="fas fa-sun"></i>';
     }
-    // Analytics link behavior - DISABLED (modal removed, using widget instead)
+    // Analytics link behavior - Show modal when clicked
     const analyticsLink = document.getElementById('analyticsLink');
     if (analyticsLink) {
         analyticsLink.addEventListener('click', function(e) {
             e.preventDefault();
-            // Analytics widget handles display automatically
-            // No modal popup needed
+            showAnalyticsModal();
         });
     }
-    // small footer Analiz link (under clock) - DISABLED
+    // small footer Analiz link (under clock) - Show modal when clicked
     const footerSmall = document.getElementById('footerAnalyticsSmall');
     if (footerSmall) {
         footerSmall.addEventListener('click', function(e) {
             e.preventDefault();
-            // Analytics widget handles display automatically
+            showAnalyticsModal();
         });
     }
 });
@@ -817,8 +816,8 @@ function showAnalyticsModal() {
         <div class="qr-modal-backdrop"></div>
         <div class="qr-modal-content">
             <button class="qr-close" id="analyticsClose">&times;</button>
-            <h3>İstatistikler</h3>
-            <div id="analyticsBody" style="min-width:260px; text-align:left; margin-top:0.6rem;">
+            <h3>İstatistikler / Analytics</h3>
+            <div id="analyticsBody" style="min-width:320px; text-align:center; margin-top:0.8rem;">
                 <p>Yükleniyor...</p>
             </div>
         </div>
@@ -829,116 +828,68 @@ function showAnalyticsModal() {
     document.getElementById('analyticsClose').addEventListener('click', () => modal.remove());
     modal.querySelector('.qr-modal-backdrop').addEventListener('click', () => modal.remove());
 
-    // Try to detect Google Analytics on the page (gtag or analytics.js)
-    let gaDetected = false;
-    let gaInfo = null;
-    try {
-        if (window.ga && typeof window.ga.getAll === 'function') {
-            const trackers = window.ga.getAll();
-            if (trackers && trackers.length) {
-                gaDetected = true;
-                gaInfo = trackers.map(t => t.get('trackingId')).join(', ');
-            }
-        } else if (typeof window.gtag === 'function' || Array.isArray(window.dataLayer)) {
-            gaDetected = true;
-            // try to find measurement id in dataLayer entries
-            try {
-                const cfg = (window.dataLayer || []).find(e => e && e['config']);
-                if (cfg && cfg['config']) gaInfo = JSON.stringify(cfg['config']);
-            } catch (e) { /* ignore */ }
-        }
-    } catch (e) { if (window.DEBUG) console.debug('ga detect err', e); }
-
-    const body = document.getElementById('analyticsBody');
-    if (body) {
-        if (gaDetected) {
-            body.innerHTML = `
-                <p><strong>Google Analytics algılandı.</strong> ${gaInfo ? `<br><small>${gaInfo}</small>` : ''}</p>
-                <p>Canlı ve tarihsel veriler yükleniyor...</p>
-                <div id="analyticsCards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:0.8rem;"></div>
-                <div style="margin-top:0.8rem; display:flex; gap:0.5rem; justify-content:flex-end;">
-                    <button class="btn btn-secondary" id="analyticsOpenGA">Analytics Panelini Aç</button>
-                    <button class="btn btn-primary" id="analyticsCloseBtn">Kapat</button>
-                </div>`;
-
-            // wire buttons
-            const closeBtn = document.getElementById('analyticsCloseBtn');
-            if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
-            const openGA = document.getElementById('analyticsOpenGA');
-            if (openGA) openGA.addEventListener('click', () => window.open('https://analytics.google.com/', '_blank', 'noopener'));
-
-            // fetch server-side GA proxy (reads GA Data API). We prefer server-side retrieval for historic data.
-            fetch('admin/ga_proxy.php', { cache: 'no-store' })
-                .then(r => { if (!r.ok) throw new Error('GA proxy failed'); return r.json(); })
-                .then(json => {
-                    const cards = document.getElementById('analyticsCards');
-                    if (!cards) return;
-                    // prefer aggregates if present
-                    const ag = json.aggregates || {};
-                    const ranges = [ ['1d','Günlük'], ['7d','Haftalık'], ['30d','Aylık'], ['365d','Yıllık'] ];
-                    cards.innerHTML = '';
-                    ranges.forEach(r => {
-                        const key = r[0]; const label = r[1];
-                        const data = ag[key];
-                        const html = data && !data.error ? `
-                            <div class="stat-card" style="background:var(--card);padding:12px;border-radius:8px;box-shadow:0 6px 14px rgba(0,0,0,0.06);">
-                                <div style="font-size:0.9rem;color:var(--text-muted);">${label}</div>
-                                <div style="font-size:1.2rem;font-weight:700;margin-top:6px;">${(data.activeUsers||0).toLocaleString('tr-TR')}</div>
-                                <div style="font-size:0.8rem;color:var(--text-light); margin-top:6px;">Yeni: ${(data.newUsers||0).toLocaleString('tr-TR')} &nbsp; Oturum: ${(data.sessions||0).toLocaleString('tr-TR')}</div>
-                            </div>` : `
-                            <div class="stat-card" style="background:var(--card);padding:12px;border-radius:8px;">
-                                <div style="font-size:0.9rem;color:var(--text-muted);">${label}</div>
-                                <div style="font-size:1rem;color:var(--text-light);margin-top:6px;">Veri yok</div>
-                            </div>`;
-                        const el = document.createElement('div'); el.innerHTML = html; cards.appendChild(el.firstElementChild);
-                    });
-
-                    // optional: show realtime active users if present
-                    if (json.realtime && typeof json.realtime.activeUsers !== 'undefined') {
-                        const live = document.createElement('div');
-                        live.style.marginTop = '10px';
-                        live.innerHTML = `<small style="color:var(--text-muted);">Canlı Aktif Kullanıcılar:</small> <strong style="margin-left:6px;">${(json.realtime.activeUsers||0).toLocaleString('tr-TR')}</strong>`;
-                        cards.parentNode.insertBefore(live, cards.nextSibling);
-                    }
-                })
-                .catch(err => {
-                    if (window.DEBUG) console.debug('ga proxy error', err);
-                    const cards = document.getElementById('analyticsCards');
-                    if (cards) cards.innerHTML = '<div style="grid-column:1/-1;color:var(--text-light);">GA verileri alınamadı.</div>';
-                });
-
-        } else {
-            body.innerHTML = `<p>Google Analytics tespit edilmedi veya erişilemiyor.</p>
-               <p>Sunucu tarafı sayaç (visitor.php) varsa aşağıdaki veriler gösterilecektir.</p>
-               <div id="visitorFetchPlaceholder" style="margin-top:0.6rem;"><em>Yükleniyor...</em></div>
-               <div style="margin-top:0.8rem; display:flex; gap:0.5rem; justify-content:flex-end;">
-                   <button class="btn btn-primary" id="analyticsCloseBtn">Kapat</button>
-               </div>`;
-            const closeBtn = document.getElementById('analyticsCloseBtn');
-            if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
-        }
-    }
-
-    // Regardless of GA detection, try to fetch server-side visitor stats and show them (if available)
+    // Fetch server-side visitor stats from visitor.php
     fetch(`${window.VISITOR_ENDPOINT}?action=stats`, { cache: 'no-store' })
-        .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
+        .then(r => { 
+            if (!r.ok) throw new Error('stats fetch failed'); 
+            return r.json(); 
+        })
         .then(data => {
+            if (window.DEBUG) console.debug('Analytics data received:', data);
+            
             const total = data.total || 0;
             const today = data.today || 0;
-            const active = data.active || 0;
-            const last = data.last_updated || '';
-            const placeholder = document.getElementById('visitorFetchPlaceholder');
-            if (placeholder) {
-                placeholder.innerHTML = `\
-                    <p><strong>Sunucu Sayaç Verisi:</strong></p>\
-                    <p>Toplam: ${total.toLocaleString('tr-TR')} &nbsp; Bugün: ${today.toLocaleString('tr-TR')} &nbsp; Aktif: ${active.toLocaleString('tr-TR')}</p>\
-                    <p style="color:var(--text-light); font-size:0.9rem;"><em>Son güncelleme: ${last}</em></p>`;
+            const lastUpdate = data.last_updated || 'Henüz veri yok';
+            
+            const body = document.getElementById('analyticsBody');
+            if (body) {
+                body.innerHTML = `
+                    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:16px 0;">
+                        <div style="background:rgba(100,200,255,0.1); padding:16px; border-radius:8px;">
+                            <div style="font-size:0.9rem; color:var(--text-muted); margin-bottom:8px;">Toplam Ziyaretçi</div>
+                            <div style="font-size:2rem; font-weight:700; color:var(--primary-color);">${total.toLocaleString('tr-TR')}</div>
+                        </div>
+                        <div style="background:rgba(100,200,255,0.1); padding:16px; border-radius:8px;">
+                            <div style="font-size:0.9rem; color:var(--text-muted); margin-bottom:8px;">Bugünkü Ziyaret</div>
+                            <div style="font-size:2rem; font-weight:700; color:var(--primary-color);">${today.toLocaleString('tr-TR')}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:12px; padding:12px; background:rgba(0,0,0,0.1); border-radius:6px;">
+                        <div style="font-size:0.85rem; color:var(--text-muted);">Son güncelleme: ${lastUpdate}</div>
+                        <div style="font-size:0.8rem; color:rgba(255,255,255,0.5); margin-top:8px;">
+                            Google Tag Manager: GTM-TD5LF2CJ
+                        </div>
+                    </div>
+                    <div style="margin-top:16px; display:flex; gap:8px; justify-content:center;">
+                        <button class="btn btn-secondary" onclick="window.open('https://analytics.google.com/', '_blank', 'noopener');">Google Analytics</button>
+                        <button class="btn btn-primary" id="analyticsCloseBtn">Kapat</button>
+                    </div>
+                `;
+                const closeBtn = document.getElementById('analyticsCloseBtn');
+                if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
             }
         })
         .catch(err => {
-            if (window.DEBUG) console.debug('visitor fetch failed', err);
-            const placeholder = document.getElementById('visitorFetchPlaceholder');
-            if (placeholder) placeholder.innerHTML = `<p>Sunucu sayaç verisi alınamadı.</p>`;
+            if (window.DEBUG) console.debug('Analytics fetch error:', err);
+            
+            const body = document.getElementById('analyticsBody');
+            if (body) {
+                body.innerHTML = `
+                    <p style="color:var(--text-muted);">Veri alınamadı</p>
+                    <p style="font-size:0.9rem; color:var(--text-light);">visitor.php sunucuda çalışıyor olmalı.</p>
+                    <div style="margin-top:12px; padding:12px; background:rgba(200,0,0,0.1); border-radius:6px; text-align:left; font-family:monospace; font-size:0.8rem;">
+                        <div>Hata: ${err.message}</div>
+                        <div style="margin-top:8px; font-size:0.75rem; color:var(--text-muted);">
+                            Kontrol: <a href="visitor.php" target="_blank" style="color:var(--primary-color);">visitor.php</a> erişimi sağla
+                        </div>
+                    </div>
+                    <div style="margin-top:16px;">
+                        <button class="btn btn-primary" id="analyticsCloseBtn">Kapat</button>
+                    </div>
+                `;
+                const closeBtn = document.getElementById('analyticsCloseBtn');
+                if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
+            }
         });
 }
 
