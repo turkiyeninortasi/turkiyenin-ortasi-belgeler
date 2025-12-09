@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "name": "Türkiye'nin Merkezi",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Türkiye'nin Tam Ortası",
+        "location": "Eşrefpaşa/Çandır, Yozgat",
+        "country": "Türkiye",
+        "method": "Area-Weighted Centroid"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.487361, 39.245472]
+      }
+    }
+  ]
+}
