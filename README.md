@@ -156,6 +156,6 @@ Bu projede katkıda bulunmak isterseniz:
 
 **Yayıncı:** Türkiye'nin Ortası Akademik Çalışma Grubu
 
-**Versiyon:** 1.0.0
+**Versiyon:** 6.6
 
 **Status:** ✅ Aktif Proje
