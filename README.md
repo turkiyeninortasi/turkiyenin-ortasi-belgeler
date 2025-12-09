@@ -1,2 +1,2 @@
 # turkiyenin-ortasi-belgeler
-Türkiye'nin harta üzerinde tam ortasını bulan akademik çalışma örneğidir.
+Türkiye'nin harita üzerinde tam ortasını (merkezini) bulan akademik çalışma örneğidir.
