@@ -1,0 +1,130 @@
+name: Publish Documents
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'data/**'
+      - '.github/workflows/publish-documents.yml'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup directories
+      run: |
+        mkdir -p ./release-assets
+        mkdir -p ./docs
+        mkdir -p ./data
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        body: |
+          # Türkiye'nin Tam Ortası - Belgeler Yayını
+          
+          **🌐 Web Sitesi:** https://merkez.web.tr/
+          
+          Bu yayın aşağıdaki belgeleri içerir:
+          - 📊 Raporlar (TR/EN)
+          - 📍 Koordinat Verileri (CSV, GeoJSON)
+          - 🗺️ Harita Dosyaları
+          - 📚 Dokümantasyon
+          
+          ## 📥 İndirme
+          Aşağıdan belgeleri indirebilirsiniz.
+          
+          ## 🔗 Bağlantılar
+          - **Web Sitesi**: https://merkez.web.tr/
+          - **E-posta**: info@merkez.web.tr
+          - **GitHub**: https://github.com/turkiyeninortasi/turkiyenin-ortasi-belgeler
+        draft: false
+        prerelease: false
+    
+    - name: Upload Report TR
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./docs/Türkiye_Tam_Ortası_Doğrulama_Raporı.pdf
+        asset_name: Türkiye_Tam_Ortası_Doğrulama_Raporı.pdf
+        asset_content_type: application/pdf
+    
+    - name: Upload Report EN
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./docs/Turkey_Geographic_Center_Verification_Report.pdf
+        asset_name: Turkey_Geographic_Center_Verification_Report.pdf
+        asset_content_type: application/pdf
+    
+    - name: Upload Coordinates CSV
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./data/turkiye_merkez_koordinatlari.csv
+        asset_name: turkiye_merkez_koordinatlari.csv
+        asset_content_type: text/csv
+    
+    - name: Upload GeoJSON
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./data/turkiye_merkez_harita.geojson
+        asset_name: turkiye_merkez_harita.geojson
+        asset_content_type: application/json
+    
+    - name: Update README
+      run: |
+        echo "# Türkiye'nin Tam Ortası - Belgeler Deposu" > README.md
+        echo "" >> README.md
+        echo "Bu depo Türkiye'nin coğrafi merkezi hakkındaki resmi belgeleri ve veri dosyalarını içerir." >> README.md
+        echo "" >> README.md
+        echo "**🌐 Web Sitesi:** [https://merkez.web.tr/](https://merkez.web.tr/)" >> README.md
+        echo "" >> README.md
+        echo "## 📊 Belgeler" >> README.md
+        echo "- 📄 Raporlar (PDF - Türkçe & İngilizce)" >> README.md
+        echo "- 📊 Koordinat Verileri (CSV)" >> README.md
+        echo "- 🗺️ Harita Dosyaları (GeoJSON)" >> README.md
+        echo "" >> README.md
+        echo "## 📥 İndirme" >> README.md
+        echo "[En son yayını indir](https://github.com/turkiyeninortasi/turkiyenin-ortasi-belgeler/releases/latest)" >> README.md
+        echo "" >> README.md
+        echo "## 🎯 Merkez Koordinatları" >> README.md
+        echo "- **Enlem:** 39.245472° N" >> README.md
+        echo "- **Boylam:** 35.487361° E" >> README.md
+        echo "- **Konum:** Eşrefpaşa/Çandır, Yozgat" >> README.md
+        echo "- **Koordinat Sistemi:** WGS84 (EPSG:4326)" >> README.md
+        echo "" >> README.md
+        echo "## 🔗 Bağlantılar" >> README.md
+        echo "- [Web Sitesi](https://merkez.web.tr/)" >> README.md
+        echo "- [Belgeler](https://merkez.web.tr/belgeler/)" >> README.md
+        echo "- [İletişim](mailto:info@merkez.web.tr)" >> README.md
+        echo "- [GitHub Repository](https://github.com/turkiyeninortasi/turkiyenin-ortasi-belgeler)" >> README.md
+        echo "" >> README.md
+        echo "---" >> README.md
+        echo "" >> README.md
+        echo "**Son Güncelleme:** $(date)" >> README.md
+        echo "**Konum:** Eşrefpaşa/Çandır, Yozgat" >> README.md
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add README.md
+        git commit -m "Update README with release info" || true
+        git push || true

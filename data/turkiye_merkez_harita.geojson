@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Türkiye Merkezi",
+        "name_en": "Turkey's Geographic Center",
+        "description": "Türkiye'nin coğrafi merkezi - Eşrefpaşa/Çandır, Yozgat",
+        "description_en": "Turkey's geographic center - Esrefpasa/Candir, Yozgat",
+        "type": "center",
+        "latitude": 39.245472,
+        "longitude": 35.487361,
+        "crs": "EPSG:4326"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [35.487361, 39.245472]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kuzey Uç",
+        "name_en": "Northernmost Point",
+        "description": "Türkiye'nin en kuzey noktası - Kastamonou",
+        "description_en": "Turkey's northernmost point - Kastamonu",
+        "type": "north",
+        "latitude": 41.738289,
+        "longitude": 33.739619,
+        "distance_km": 267.52
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [33.739619, 41.738289]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Güney Uç",
+        "name_en": "Southernmost Point",
+        "description": "Türkiye'nin en güney noktası - Antakya",
+        "description_en": "Turkey's southernmost point - Antakya",
+        "type": "south",
+        "latitude": 35.813254,
+        "longitude": 36.161953,
+        "distance_km": 397.89
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.161953, 35.813254]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Doğu Uç",
+        "name_en": "Easternmost Point",
+        "description": "Türkiye'nin en doğu noktası - Hakkari",
+        "description_en": "Turkey's easternmost point - Hakkari",
+        "type": "east",
+        "latitude": 43.603417,
+        "longitude": 45.558022,
+        "distance_km": 558.34
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [45.558022, 43.603417]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Batı Uç",
+        "name_en": "Westernmost Point",
+        "description": "Türkiye'nin en batı noktası - İzmir",
+        "description_en": "Turkey's westernmost point - Izmir",
+        "type": "west",
+        "latitude": 35.180997,
+        "longitude": 26.109211,
+        "distance_km": 612.45
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [26.109211, 35.180997]
+      }
+    }
+  ],
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  }
+}

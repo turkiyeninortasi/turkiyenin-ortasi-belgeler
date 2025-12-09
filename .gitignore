@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*~
+
+# IDE specific
+.vscode/settings.json
+.idea/
+
+# Python
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log
+
+# Environment files
+.env
+.env.local

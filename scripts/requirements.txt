@@ -1,0 +1,38 @@
+# Türkiye'nin Tam Ortası - Python Bağımlılıkları
+# Turkey's Geographic Center - Python Dependencies
+
+# Core dependencies
+# No external dependencies required for geographic_center.py and data_processor.py
+# These scripts use only Python standard library
+
+# For advanced features (optional):
+
+# Data processing and analysis / Veri işleme ve analiz
+# pandas==2.0.3  # For advanced CSV/Excel operations
+# geopandas==0.12.0  # For geographic data operations
+# shapely==2.0.1  # For geometric operations
+
+# Web framework (for API) / Web Framework
+# flask==2.3.2  # For REST API
+# flask-cors==4.0.0  # For CORS support
+
+# Database (optional) / Veritabanı
+# sqlalchemy==2.0.20  # For database operations
+# psycopg2-binary==2.9.6  # PostgreSQL adapter
+
+# Testing / Test işlemleri
+# pytest==7.4.0  # For unit tests
+# pytest-cov==4.1.0  # For coverage reports
+
+# Documentation / Dokümantasyon
+# sphinx==7.0.0  # For API documentation
+# sphinx-rtd-theme==1.2.0  # ReadTheDocs theme
+
+# Linting and formatting / Kod kontrolü ve biçimlendirme
+# pylint==2.17.4  # Code analysis
+# black==23.7.0  # Code formatter
+# flake8==6.0.0  # Style guide enforcement
+
+# Utilities / Yardımcı araçlar
+# python-dotenv==1.0.0  # For environment variables
+# requests==2.31.0  # For HTTP requests

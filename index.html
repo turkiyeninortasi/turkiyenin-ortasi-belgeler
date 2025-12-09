@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türkiye'nin Tam Ortası - Türkiye'nin Coğrafi Merkezi ve Uç Noktaları</title>
+    <meta name="description" content="Türkiye'nin tam ortası nerededir? Türkiye'nin coğrafi merkezi, uç noktaları, kuzey-güney-doğu-batı sınırları ve mesafe hesaplama aracı ile detaylı, bilimsel ve interaktif bir inceleme.">
+    <meta name="keywords" content="Türkiye'nin tam ortası, Türkiye'nin merkezi, Türkiye'nin coğrafi merkezi, Türkiye'nin ortası nerededir, Türkiye'nin ortası nerdedir, Türkiye'nin tam ortası neresidir, Türkiye'nin merkezi neresidir, Turkey geographic center, center of Turkey, Türkiyenin ortası, Türkiyenin tam ortası, Türkiyenin merkezi, Türkiyenin ortası nerededir, Türkiyenin ortası neresidir">
+    <meta name="author" content="Coğrafi Bilgi Sistemleri Uzmanı">
+    <meta name="geo.region" content="TR-66">
+    <meta name="geo.placename" content="Yozgat">
+    <meta name="geo.position" content="39.245472;35.487361">
+    <meta name="ICBM" content="39.245472, 35.487361">
+    <link rel="canonical" href="https://merkez.web.tr/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://merkez.web.tr/">
+    <meta property="og:title" content="Türkiye'nin Tam Ortası ve Coğrafi Uç Noktaları">
+    <meta property="og:description" content="Türkiye'nin coğrafi merkezi, uç noktaları, Hakkari, Ardahan, Muğla uç bölgeleri ve detaylı hesaplama metodolojisi ile interaktif harita.">
+    <meta property="og:image" content="https://merkez.web.tr/og-image.jpg">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Türkiye'nin Tam Ortası">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://merkez.web.tr/">
+    <meta name="twitter:title" content="Türkiye'nin Tam Ortası ve Coğrafi Uç Noktaları">
+    <meta name="twitter:description" content="Türkiye'nin coğrafi merkezi, uç noktaları, Hakkari, Ardahan, Muğla uç bölgeleri ve detaylı hesaplama metodolojisi ile interaktif harita.">
+    <meta name="twitter:image" content="https://merkez.web.tr/og-image.jpg">
+    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TD5LF2CJ');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'page_path': window.location.pathname,
+        'page_title': document.title,
+        'anonymize_ip': true
+      });
+    </script>
+    <!-- End Google Analytics 4 -->
+        <!-- html2canvas for map screenshot (client-side) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- JSON-LD Schema.org Yapılandırılmış Veri -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Place",
+      "name": "Türkiye'nin Coğrafi Merkezi",
+      "description": "Türkiye'nin geometrik merkezi ve tam ortası",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "39.245472",
+        "longitude": "35.487361"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Eşrefpaşa/Çandır",
+        "addressRegion": "Yozgat",
+        "addressCountry": "TR"
+      },
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "Türkiye"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Türkiye'nin Tam Ortası",
+      "url": "https://merkez.web.tr/",
+      "description": "Türkiye'nin coğrafi merkezi, uç noktaları ve mesafe hesaplama aracı",
+      "inLanguage": "tr-TR",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://merkez.web.tr/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ana Sayfa",
+          "item": "https://merkez.web.tr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Harita",
+          "item": "https://merkez.web.tr/#harita"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Uç Noktalar",
+          "item": "https://merkez.web.tr/#uc-noktalar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Mesafe Ölç",
+          "item": "https://merkez.web.tr/#mesafe"
+        }
+      ]
+    }
+    </script>
+</head>
+<body itemscope itemtype="https://schema.org/WebPage">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD5LF2CJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand" aria-label="Ana Sayfa">
+                <i class="fas fa-map-marked-alt"></i>
+                <span data-i18n="nav.title">Türkiye'nin Tam Ortası</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#harita" class="nav-link active"><span data-i18n="nav.map">Harita</span></a></li>
+                <li><a href="#ozet" class="nav-link"><span data-i18n="nav.summary">Özet</span></a></li>
+                <li><a href="#metodoloji" class="nav-link"><span data-i18n="nav.methodology">Metodoloji</span></a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.more">Daha Fazla</span> ▾</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#indirmeler" class="nav-link"><span data-i18n="nav.downloads">İndirmeler</span></a></li>
+                        <li><a href="#egitim" class="nav-link"><span data-i18n="nav.education">Eğitim</span></a></li>
+                        <li><a href="#hakkinda" class="nav-link"><span data-i18n="nav.about">Hakkında</span></a></li>
+                        <li><a href="#mesafe" class="nav-link"><i class="fas fa-ruler"></i> <span data-i18n="nav.distance">Mesafe Öl</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <button class="icon-btn" id="qrCodeBtn" onclick="showQRCode()" title="QR Kod">
+                    <i class="fas fa-qrcode"></i>
+                </button>
+                <button class="icon-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="Karanlık Mod">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn" id="langToggle" title="Dil" aria-label="Dil">
+                    <span id="langLabel">TR</span>
+                </button>
+                <div id="langMenu" class="lang-menu" style="display:none; position:absolute; right:18px; top:64px; z-index:2000;"></div>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Interactive Map Section -->
+    <section class="map-section" id="harita">
+        <div class="container">
+            <div class="map-header">
+                <h1 class="main-title" data-i18n="map.title">Türkiye'nin Coğrafi Merkezi</h1>
+                <p class="map-description" data-i18n="map.description">İnteraktif harita ile merkez noktayı keşfedin</p>
+                <div class="map-coords-display">
+                    <div data-i18n="map.location">Eşrefpaşa/Çandır, Yozgat</div>
+                    <div data-i18n="map.coordinates">Koordinat: 39.245472° N, 35.487361° E</div>
+                </div>
+            </div>
+            <div class="coordinates-display-top">
+                <div class="coord-item-top">
+                    <span class="coord-label-top" data-i18n="map.latitude">Enlem (Latitude)</span>
+                    <span class="coord-value-top" id="latitude">39.245472° N</span>
+                    <button class="copy-btn-top" onclick="copyToClipboard(getCurrentLat())" title="Kopyala">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <div class="coord-item-top">
+                    <span class="coord-label-top" data-i18n="map.longitude">Boylam (Longitude)</span>
+                    <span class="coord-value-top" id="longitude">35.487361° E</span>
+                    <button class="copy-btn-top" onclick="copyToClipboard(getCurrentLon())" title="Kopyala">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="map"></div>
+            <div class="map-controls">
+                <button class="btn-primary" onclick="zoomToCenter()">
+                    <i class="fas fa-search-location"></i> <span data-i18n="map.zoomToCenter">Merkeze Yakınlaştır</span>
+                </button>
+                <button class="btn-secondary" onclick="showFullTurkey()">
+                    <i class="fas fa-globe"></i> <span data-i18n="map.showTurkey">Tüm Türkiye'yi Göster</span>
+                </button>
+                    <button class="btn-info" onclick="mapScreenshot()" title="Harita Görüntüsünü İndir">
+                        <i class="fas fa-camera"></i> <span data-i18n="map.downloadScreenshot">Harita Görüntüsünü İndir</span>
+                    </button>
+                <button class="btn-info" onclick="document.querySelector('#mesafe').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fas fa-ruler"></i> <span data-i18n="nav.distance">Türkiye'nin Ortasına Mesafe Ölç</span>
+                </button>
+            </div>
+            <!-- Mesafe Ölçme (haritanın hemen altına taşındı) -->
+            <div class="distance-measurement" id="mesafe">
+                <div class="distance-controls">
+                    <div class="form-group">
+                        <label for="locationInput" data-i18n="common.locationInput">Konumunuzu Girin:</label>
+                        <div class="input-with-button">
+                            <input type="text" id="locationInput" data-i18n-placeholder="common.search" placeholder="Şehir, ilçe veya adres girin">
+                            <button class="btn-primary" onclick="useCurrentLocation()">
+                                <i class="fas fa-location-arrow"></i> <span data-i18n="distance.useCurrent">Konumumu Otomatik Bul</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="calculateDistance()">
+                        <i class="fas fa-ruler"></i> <span data-i18n="distance.calculate">Mesafeyi Hesapla</span>
+                    </button>
+                </div>
+                <div id="distanceResults" class="distance-results" style="display: none;">
+                    <h3>Sonuçlar</h3>
+                    <div class="result-item">
+                        <i class="fas fa-crow"></i>
+                        <div>
+                            <span class="result-label">Türkiye'nin ortasına kuş uçuşu mesafeniz:</span>
+                            <span id="straightDistance" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-route"></i>
+                        <div>
+                            <span class="result-label">Tükiye'nin ortasına karayolu mesafeniz:</span>
+                            <span id="roadDistance" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="result-label">Türkiye'nin ortasına tahmini varış süreniz:</span>
+                            <span id="travelTime" class="result-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Executive Summary -->
+            <section class="content-section" id="ozet">
+                <h2 class="section-title" data-i18n="summary.title">Özet</h2>
+                <div class="summary-card">
+                    <p data-i18n="summary.question"><strong>Türkiye'nin tam ortası nerededir?</strong> Bu çalışma, Türkiye Cumhuriyeti(ADM0) sınırları üzerinden geometrik merkez
+                    (alan-ağırlıklı centroid) hesabı yaparak, <strong id="summary-coords">39.245472° N, 35.487361° E</strong> koordinatlarının
+                    Türkiye'nin coğrafi merkezi ve <em>Türkiye'nin tam ortası</em> olduğunu bilimsel ve tekrarlanabilir bir metodoloji ile
+                    ortaya koymaktadır.</p>
+                    <p data-i18n="summary.uncertainty">Bu nokta <strong id="summary-location">Eşrefpaşa/Çandır, Yozgat</strong> civarında yer almakta olup, kullanılan veri seti ve projeksiyon
+                    sistemi nedeniyle en fazla yaklaşık 3 km yarıçaplı bir alan içinde değişebilecek bir belirsizlik payına sahiptir.</p>
+                </div>
+            </section>
+
+            <!-- Methodology -->
+            <section class="content-section" id="metodoloji">
+                <h2 class="section-title" data-i18n="sections.methodology">Hesaplama Metodolojisi</h2>
+                <div class="methodology-grid">
+                    <div class="method-card">
+                        <div class="method-icon">📐</div>
+                        <h3 data-i18n="methodology.centroid">Geometrik Centroid</h3>
+                        <p data-i18n="methodology.centroid_desc">Çokgenin ağırlık merkezini hesaplamak için kullanılan matematiksel yöntem.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon">🌍</div>
+                        <h3 data-i18n="methodology.projection">WGS84 Koordinat Sistemi</h3>
+                        <p data-i18n="methodology.projection_desc">Dünya yüzeyindeki noktaları tanımlamak için kullanılan standart koordinat sistemi.</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon">🔢</div>
+                        <h3 data-i18n="methodology.analysis">Sayısal Analiz</h3>
+                        <p data-i18n="methodology.analysis_desc">Kesin sonuçlar için ileri düzey matematiksel hesaplamalar kullanılmıştır.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Details -->
+            <section class="content-section">
+                <h2 class="section-title" data-i18n="sections.technical">Teknik Detaylar</h2>
+                <div class="technical-details">
+                    <div class="detail-item">
+                        <h3 data-i18n="technical.software">Kullanılan Yazılım</h3>
+                        <p data-i18n="technical.software_list">QGIS 3.28, Python, GDAL/OGR</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3 data-i18n="technical.datasource">Veri Kaynağı</h3>
+                        <p data-i18n="technical.data_source_name">GADM - Global Administrative Areas (v4.1)</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3 data-i18n="technical.projection">Projeksiyon</h3>
+                        <p data-i18n="technical.projection_name">LAEA (Lambert Azimutal Eşit Alan)</p>
+                        <code id="proj-params" data-i18n="technical.projection_params">
+                            +proj=laea +lat_0=39.245472 +lon_0=35.487361 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs
+                        </code>
+                    </div>
+                    <div class="detail-item">
+                        <h3 data-i18n="technical.coordinate_system">Koordinat Sistemi</h3>
+                        <p data-i18n="technical.coordinate_system_name">WGS84 (EPSG:4326)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download Section -->
+            <section class="content-section" id="indirmeler">
+                <h2 class="section-title" data-i18n="sections.downloads">İndirmeler</h2>
+                <div class="download-grid">
+                    <div class="download-card">
+                        <i class="fas fa-file-csv"></i>
+                        <h3 data-i18n="download.csv">Koordinatlar (CSV)</h3>
+                        <p data-i18n="download.csv_desc">Türkiye'nin coğrafi merkez koordinatları</p>
+                        <a class="btn-download" href="turkiye_merkez_koordinatlari.csv" download>
+                                <i class="fas fa-download"></i> <span data-i18n="common.download">İndir</span>
+                            </a>
+                    </div>
+                    <div class="download-card">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3 data-i18n="download.pdf">Rapor (PDF)</h3>
+                        <p data-i18n="download.pdf_desc">Hesaplama metodolojisi ve sonuçları</p>
+                        <button class="btn-download" onclick="downloadPDF()" style="background:none;border:none;padding:0;cursor:pointer;width:100%;">
+                            <span style="display:inline-block;width:100%;padding:0.7rem 1rem;background:#0ea5a4;color:white;border-radius:6px;text-align:center;text-decoration:none;">
+                                <i class="fas fa-download"></i> <span data-i18n="common.download">İndir</span>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="download-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3 data-i18n="download.geojson">Harita (GeoJSON)</h3>
+                        <p data-i18n="download.geojson_desc">Coğrafi merkez noktası</p>
+                        <a class="btn-download" href="turkiye_merkez_harita.geojson" download>
+                            <i class="fas fa-download"></i> <span data-i18n="common.download">İndir</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="content-section" id="egitim">
+                <h2 class="section-title" data-i18n="sections.education">Eğitim ve Öğrenme</h2>
+                <div class="education-content">
+                    <div class="education-card">
+                        <h3><i class="fas fa-graduation-cap"></i> <span data-i18n="education.what">Coğrafi Merkez Hesaplama Nedir?</span></h3>
+                        <p data-i18n="education.what_desc">
+                            Bir ülkenin veya bölgenin coğrafi merkezi, o alanın ağırlık merkezi olarak kabul edilen noktadır. İngilizce literatürde
+                            "geographical center" veya "center of gravity of a polygon" olarak geçer. Bu sitede kullanılan yöntem,
+                            Türkiye'nin sınırlarını temsil eden çokgenin alan-ağırlıklı merkezinin (area-weighted centroid) hesaplanmasına
+                            dayanır.
+                        </p>
+                            <a href="#metodoloji" class="learn-more" data-i18n="education.goto_methodology"><span data-i18n="education.goto_methodology">Metodolojiye git</span> <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="education-card">
+                        <h3><i class="fas fa-calculator"></i> <span data-i18n="education.how">Nasıl Hesaplanır?</span></h3>
+                        <p data-i18n="education.how_desc">
+                            Özetle; Türkiye sınırları sayısal ortamda küçük üçgenlere/parçalara bölünür, her parçanın alanı ve kütle merkezi hesaplanır,
+                            ardından tüm parçalar ağırlıklandırılarak tek bir ortalama nokta elde edilir. Bu işlem; coğrafi bilgi sistemleri (CBS),
+                            projeksiyon dönüşümleri ve sayısal entegrasyon teknikleriyle yapılır. Böylece "Türkiye'nin ortası neresidir?" sorusuna
+                            matematiksel olarak tutarlı bir cevap üretilebilir.
+                        </p>
+                            <a href="#uc-noktalar" class="learn-more" data-i18n="education.goto_extreme"><span data-i18n="education.goto_extreme">Uç noktaları incele</span> <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Türkiye'nin Uç Noktaları -->
+            <section class="content-section" id="uc-noktalar" itemscope itemtype="https://schema.org/Place">
+                <h2 class="section-title" data-i18n="sections.extremePoints">Türkiye'nin Coğrafi Uç Noktaları</h2>
+                <p style="max-width: 800px; margin: 0 auto 2rem; text-align: center;" data-i18n="extremePoints.intro">
+                    <span data-i18n="extremePoints.intro"></span>
+                </p>
+                <div class="extreme-points-grid">
+                    <!-- Kuzey -->
+                    <div class="extreme-point-card north">
+                        <div class="point-header">
+                            <i class="fas fa-arrow-up"></i>
+                            <h3 data-i18n="extremePoints.north">En Kuzey Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.north_location">İnceburun / Sinop</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 42°06'21"N 34°58'25"E</p>
+                            <p class="point-description" data-i18n="extremePoints.north_desc">Türkiye'nin en kuzey noktasıdır. Karadeniz kıyısında yer alır ve Avrupa kıtasının en kuzey kara noktalarından biri olarak kabul edilir.</p>
+                            <button class="btn-point" onclick="openInMaps(42.105833, 34.973611, 'İnceburun / Sinop')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Güney -->
+                    <div class="extreme-point-card south">
+                        <div class="point-header">
+                            <i class="fas fa-arrow-down"></i>
+                            <h3 data-i18n="extremePoints.south">En Güney Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.south_location">Topraktutan / Hatay</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 35°48'46"N 36°09'20"E</p>
+                            <p class="point-description" data-i18n="extremePoints.south_desc">Türkiye'nin Suriye sınırındaki en güney kara noktasıdır. Asi Nehri vadisinin güneyinde, Amik Ovası ile Orta Doğu geçiş kuşağının kesişiminde yer alır.</p>
+                            <button class="btn-point" onclick="openInMaps(35.812778, 36.155556, 'Topraktutan / Hatay')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Batı -->
+                    <div class="extreme-point-card west">
+                        <div class="point-header">
+                            <i class="fas fa-arrow-left"></i>
+                            <h3 data-i18n="extremePoints.west">En Batı Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.west_location">İpsala / Edirne</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 40°04'15"N 26°06'25"E</p>
+                            <p class="point-description" data-i18n="extremePoints.west_desc">Türkiye'nin Yunanistan sınırındaki en batı kara noktalarından biridir. Meriç Nehri deltası ve Ege Denizi geçiş kuşağını temsil eder.</p>
+                            <button class="btn-point" onclick="openInMaps(40.070833, 26.106944, 'İpsala / Edirne')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Doğu -->
+                    <div class="extreme-point-card east">
+                        <div class="point-header">
+                            <i class="fas fa-arrow-right"></i>
+                            <h3 data-i18n="extremePoints.east">En Doğu Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.east_location">Dilucu / Iğdır</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> 39°39'06"N 44°49'04"E</p>
+                            <p class="point-description" data-i18n="extremePoints.east_desc">Türkiye'nin Azerbaycan (Nahçıvan Özerk Cumhuriyeti) ve kısmen İran sınırına en yakın kara uzantılarından biridir. Kafkasya geçiş kapısı niteliğindedir.</p>
+                            <button class="btn-point" onclick="openInMaps(39.651667, 44.817778, 'Dilucu / Iğdır')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Güneydoğu Uç Nokta -->
+                    <div class="extreme-point-card south">
+                        <div class="point-header">
+                            <i class="fas fa-location-arrow"></i>
+                            <h3 data-i18n="extremePoints.southeast">Güneydoğu Uç Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.southeast_location">Hakkari Mountains / Turkey-Iran-Iraq Triangle</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> ~37°00'N 44°30'E</p>
+                            <p class="point-description" data-i18n="extremePoints.southeast_desc">Türkiye'nin en dağlık ve sarp alanlarından biridir. Yüksek rakım, derin vadiler ve karasal iklimin hakim olduğu bu bölge, ülkenin en güneydoğu coğrafi uzantısını temsil eder.</p>
+                            <button class="btn-point" onclick="openInMaps(37.0, 44.5, 'Hakkari Güneydoğu Uç Noktası')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kuzeydoğu Uç Nokta -->
+                    <div class="extreme-point-card north">
+                        <div class="point-header">
+                            <i class="fas fa-location-arrow"></i>
+                            <h3 data-i18n="extremePoints.northeast">Kuzeydoğu Uç Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.northeast_location">Ardahan / Posof Area</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> ~41°30'N 43°10'E</p>
+                            <p class="point-description" data-i18n="extremePoints.northeast_desc">Kafkasya'ya açılan kapı niteliğinde olan Ardahan, Türkiye'nin kuzeydoğu uç bölgesini oluşturur. Yüksek plato yüzeyleri, derin vadiler ve sert karasal iklim ile dikkat çeker.</p>
+                            <button class="btn-point" onclick="openInMaps(41.5, 43.2, 'Ardahan Kuzeydoğu Uç Noktası')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Güneybatı Uç Nokta -->
+                    <div class="extreme-point-card west">
+                        <div class="point-header">
+                            <i class="fas fa-location-arrow"></i>
+                            <h3 data-i18n="extremePoints.southwest">Güneybatı Uç Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.southwest_location">Muğla Gulfs (Between Gökova - Fethiye)</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> ~36°30'N 28°30'E</p>
+                            <p class="point-description" data-i18n="extremePoints.southwest_desc">Türkiye'nin Ege ve Akdeniz'in birleştiği güneybatı ucudur. Gökova, Hisarönü ve Fethiye körfezleri; kıta sahanlığı, koy-girinti çıkıntı yoğunluğu ve deniz derinlikleriyle Akdeniz havzasının en karmaşık kıyı morfolojilerinden birini sunar.</p>
+                            <button class="btn-point" onclick="openInMaps(36.5, 28.5, 'Muğla Güneybatı Uç Noktası')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kuzeybatı Uç Nokta -->
+                    <div class="extreme-point-card north">
+                        <div class="point-header">
+                            <i class="fas fa-location-arrow"></i>
+                            <h3 data-i18n="extremePoints.northwest">Kuzeybatı Uç Nokta</h3>
+                        </div>
+                        <div class="point-details">
+                            <h4 data-i18n="extremePoints.northwest_location">Kırklareli / Dereköy - Bulgaria Border</h4>
+                            <p><i class="fas fa-map-marker-alt"></i> ~41°59'N 27°10'E</p>
+                            <p class="point-description" data-i18n="extremePoints.northwest_desc">Türkiye'nin Bulgaristan sınırındaki kuzeybatı uç noktasıdır. Istranca Dağları'nın güney yamaçlarında yer alan bu bölge, Trakya'nın kuzey sınırını ve Balkan geçiş kuşağını temsil eder. Ormanlık alan ve engebeli arazi yapısıyla dikkat çeker.</p>
+                            <button class="btn-point" onclick="openInMaps(41.983333, 27.166667, 'Kırklareli Kuzeybatı Uç Noktası')">
+                                <i class="fas fa-map-pin"></i> <span data-i18n="extremePoints.showOnMap">Show on Map</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kıyı Girinti-Çıkıntıları ve Derinlikler Açıklaması -->
+                <div class="card" style="margin-top: 2.5rem;">
+                    <h3 data-i18n="coast.title">Türkiye Kıyı Çizgisi, Koylar ve Girinti-Çıkıntıların Coğrafi Anlamı</h3>
+                    <p data-i18n="coast.desc">
+                        Türkiye'nin kıyı şeridi yalnızca basit bir çizgiden ibaret değildir; özellikle Ege ve Akdeniz
+                        kıyılarında koylar, körfezler, yarımadalar ve burunlar kıyı çizgisini son derece girintili-çıkıntılı
+                        hâle getirir. Bu durum, gerçek kıyı uzunluğunu harita üzerinde düz bir çizgiyle ölçülen mesafeden
+                        çok daha fazla yapar.
+                    </p>
+                    <p data-i18n="coast.analysis">
+                        Profesyonel coğrafi analizlerde, kıyı uzunluğu ve deniz derinlikleri; yüksek çözünürlüklü sayısal
+                        yükseklik modelleri (DEM), bathimetri verileri ve vektör tabanlı kıyı çokgenleri kullanılarak
+                        hesaplanır. Kıyıdaki her küçük girinti ve çıkıntı, poligonun çevre uzunluğunu artırır. Bu nedenle,
+                        "Türkiye'nin kıyı uzunluğu kaç kilometredir?" sorusuna verilen cevap; kullanılan veri setinin çözünürlüğü,
+                        kıyı tanımına dahil edilen ada ve adacık sayısı ve ölçekteki genelleştirme düzeyine göre değişebilir.
+                    </p>
+                    <p data-i18n="coast.center_note">
+                        Aynı mantık, coğrafi merkez hesabı için de geçerlidir: kullanılan sınır verisinin çözünürlüğü,
+                        seçilen projeksiyon sistemi ve sayısal entegrasyon yöntemi, sonucu birkaç kilometreye kadar
+                        etkileyebilir. Bu sitede kullanılan yöntem; yüksek çözünürlüklü sınır verisi, alan koruyan projeksiyon
+                        ve alan-ağırlıklı centroid hesabı ile, bilimsel olarak tekrarlanabilir ve şeffaf bir çözüm sunmayı
+                        amaçlamaktadır.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Mesafe bölümü harita altına taşındı -->
+
+            <!-- Credits -->
+            <section class="content-section" id="hakkinda">
+                <h2 class="section-title" data-i18n="sections.credits">Çalışma Bilgileri</h2>
+                
+                <!-- İstatistikler -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="stat-value" data-i18n="credits.latitude">39.245° N</div>
+                        <div class="stat-label" data-i18n="credits.lat_label">Enlem</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <div class="stat-value" data-i18n="credits.longitude">35.487° E</div>
+                        <div class="stat-label" data-i18n="credits.lon_label">Boylam</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="stat-value" data-i18n="credits.elevation">~1250m</div>
+                        <div class="stat-label" data-i18n="credits.elev_label">Yükseklik</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-location-arrow"></i>
+                        </div>
+                        <div class="stat-value" data-i18n="credits.extreme_count">8 Nokta</div>
+                        <div class="stat-label" data-i18n="credits.extreme_label">Uç Noktalar</div>
+                    </div>
+                </div>
+
+                <div class="credits">
+                    <div class="credit-item">
+                        <h3 data-i18n="credits.author_label">Hazırlayan</h3>
+                        <p data-i18n="credits.author">Coğrafi Bilgi Sistemleri Uzmanı</p>
+                    </div>
+                    <div class="credit-item">
+                        <h3 data-i18n="credits.update_label">Son Güncelleme</h3>
+                        <p data-i18n="credits.update_date">8 Aralık 2025</p>
+                    </div>
+                    <div class="credit-item">
+                        <h3 data-i18n="credits.license_label">Lisans</h3>
+                        <p data-i18n="credits.license">Creative Commons CC BY-SA 4.0</p>
+                    </div>
+                </div>
+                <div class="disclaimer">
+                    <p><strong data-i18n="disclaimer.important">Önemli Not:</strong> <span data-i18n="disclaimer.text">Bu çalışma akademik bir çalışma olup, resmi bir belge değildir. Koordinatlar teknik nedenlerle değişiklik gösterebilir.</span></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="index.html" class="footer-logo" aria-label="Ana Sayfa">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span data-i18n="footer.title">Türkiye'nin Tam Ortası</span>
+                </a>
+                <div class="footer-coords">
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i> 
+                        <a href="#" onclick="openInMaps(39.245472, 35.487361, 'Türkiye Merkezi'); return false;" 
+                           class="footer-link" title="Google Maps'te aç" data-i18n="footer.coordinates">39.245472° N, 35.487361° E</a>
+                        <button class="copy-btn-footer" onclick="copyToClipboard('39.245472, 35.487361')" title="Koordinatları Kopyala">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </p>
+                    <p>
+                        <i class="fas fa-location-dot"></i> 
+                        <a href="#harita" class="footer-link" title="Haritada gör" data-i18n="footer.location">Eşrefpaşa/Çandır, Yozgat</a>
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/turkiyeninortasi/turkiyenin-ortasi-belgeler" target="_blank" rel="noopener noreferrer" title="GitHub'da kaynak kodu görüntüle">
+                        <i class="fab fa-github"></i> <span data-i18n="footer.source">Kaynak Kod</span>
+                    </a>
+                    <a href="https://merkez.web.tr/belgeler/" target="_blank" rel="noopener noreferrer" title="Dokümantasyonu oku">
+                        <i class="fas fa-book"></i> <span data-i18n="footer.docs">Dokümantasyon</span>
+                    </a>
+                    <a href="mailto:info@merkez.web.tr" title="E-posta gönder">
+                        <i class="fas fa-envelope"></i> <span data-i18n="footer.contact">İletişim</span>
+                    </a>
+                </div>
+                <div class="footer-social">
+                    <h4 data-i18n="footer.share">Paylaş</h4>
+                    <div class="social-buttons">
+                        <button class="social-btn facebook" onclick="shareOnFacebook()" title="Facebook'ta Paylaş">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn twitter" onclick="shareOnTwitter()" title="Twitter'da Paylaş">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="social-btn whatsapp" onclick="shareOnWhatsApp()" title="WhatsApp'ta Paylaş">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
+                        <button class="social-btn linkedin" onclick="shareOnLinkedIn()" title="LinkedIn'de Paylaş">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                        <button class="social-btn copy" onclick="copyPageLink()" title="Linki Kopyala">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; 2025 Tüm hakları saklıdır. Veriler bilgilendirme amaçlıdır.</p>
+                <p class="footer-date">
+                    <i class="fas fa-clock"></i> 
+                    <span id="currentDateTime" data-i18n="footer.loading">Yükleniyor...</span>
+                    <br>
+                    <a href="#" id="footerAnalyticsSmall" class="footer-link" style="font-size:0.85rem; display:inline-block; margin-top:6px;" data-i18n="footer.analytics">Analiz</a>
+                </p>
+                <div class="analytics-badge" style="margin-top:0.5rem; text-align:center; width:100%;">
+                    <a href="#" id="analyticsLink" style="font-size:0.8rem; color:rgba(255,255,255,0.7); text-decoration:none;" data-i18n="footer.analytics">Analytics</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Yukarı Çık Butonu -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="Yukarı Çık">
+    <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Ziyaretçi widget kaldırıldı: analytics footer link'i gerçek veriyi popup ile gösterecek -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+    <!-- QR Code JS (client-side generator) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <!-- Inline translations as fallback -->
+        <script type="application/json" id="i18n-tr">
+{
+    "app": { "title": "Türkiye'nin Tam Ortası - Eşrefpaşa/Çandır, Yozgat" },
+    "nav": { "title": "Türkiye'nin Tam Ortası", "map": "Harita", "more": "Daha Fazla", "summary": "Özet", "methodology": "Metodoloji", "downloads": "İndirmeler", "education": "Eğitim", "about": "Hakkında", "distance": "Mesafe Öl" },
+    "map": { "title": "Türkiye'nin Coğrafi Merkezi", "description": "İnteraktif harita ile merkez noktayı keşfedin", "latitude": "Enlem (Latitude)", "longitude": "Boylam (Longitude)", "zoomToCenter": "Merkeze Yakınlaştır", "showTurkey": "Tüm Türkiye'yi Göster", "downloadScreenshot": "Harita Görüntüsünü İndir" },
+    "summary": {
+        "title": "Özet",
+        "question": "Türkiye'nin tam ortası nerede? Bu çalışma, 39.245472° N, 35.487361° E koordinatlarının Türkiye'nin coğrafi ve tam merkezi olduğunu, Türkiye Cumhuriyeti (ADM0) sınırları üzerinde alan-ağırlıklı geometrik centroid hesaplamasıyla bilimsel ve tekrarlanabilir şekilde göstermektedir.",
+        "uncertainty": "Bu nokta Eşrefpaşa/Çandır, Yozgat yakınında yer almakta olup, kullanılan veri seti ve projeksiyon sistemine bağlı olarak yaklaşık 3 km yarıçapında bir belirsizlik payı olabilir."
+    },
+    "methodology": {
+        "centroid": "Geometrik Centroid",
+        "centroid_desc": "Bir poligonun ağırlık merkezini hesaplamak için kullanılan matematiksel yöntem.",
+        "projection": "WGS84 Koordinat Sistemi",
+        "projection_desc": "Yeryüzündeki noktaları tanımlamak için kullanılan standart koordinat sistemi.",
+        "analysis": "Sayısal Analiz",
+        "analysis_desc": "Kesin sonuçlar için gelişmiş matematiksel hesaplamalar kullanılmıştır."
+    },
+    "technical": {
+        "software": "Kullanılan Yazılımlar",
+        "software_list": "QGIS 3.28, Python, GDAL/OGR",
+        "datasource": "Veri Kaynağı",
+        "data_source_name": "GADM - Global Administrative Areas (v4.1)",
+        "projection": "Projeksiyon",
+        "projection_name": "LAEA (Lambert Azimuthal Equal-Area)",
+        "projection_params": "+proj=laea +lat_0=39.245472 +lon_0=35.487361 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+        "coordinate_system": "Koordinat Sistemi",
+        "coordinate_system_name": "WGS84 (EPSG:4326)"
+    },
+    "download": {
+        "csv": "Koordinatlar (CSV)",
+        "csv_desc": "Türkiye'nin coğrafi merkez koordinatları",
+        "pdf": "Rapor (PDF)",
+        "pdf_desc": "Hesaplama metodolojisi ve sonuçlar",
+        "geojson": "Harita (GeoJSON)",
+        "geojson_desc": "Coğrafi merkez noktası"
+    },
+    "education": {
+        "what": "Coğrafi Centroid Hesabı Nedir?",
+        "what_desc": "Bir ülkenin veya bölgenin coğrafi merkezi, o alanın ağırlık merkezi olarak kabul edilen noktadır. İngilizce literatürde 'geographical center' veya 'center of gravity of a polygon' olarak geçer. Bu sitede kullanılan yöntem, Türkiye sınırlarını temsil eden poligonun alan-ağırlıklı centroidinin hesaplanmasına dayanır.",
+        "goto_methodology": "Metodolojiye Git <i class='fas fa-arrow-right'></i>",
+        "how": "Nasıl Hesaplanır?",
+        "how_desc": "Özetle; Türkiye'nin sınırları dijital ortamda küçük üçgenlere/segmentlere bölünür, her segmentin alanı ve ağırlık merkezi hesaplanır, ardından tüm segmentler ağırlıklandırılarak tek bir ortalama nokta elde edilir. Bu işlem coğrafi bilgi sistemleri (CBS), projeksiyon dönüşümleri ve sayısal entegrasyon teknikleriyle yapılır. Böylece 'Türkiye'nin merkezi neresi?' sorusuna matematiksel olarak tutarlı bir yanıt üretilebilir.",
+        "goto_extreme": "Uç noktaları incele <i class='fas fa-arrow-right'></i>"
+    },
+    "coast": {
+        "title": "Türkiye Kıyı Çizgisi, Koylar ve Girinti-Çıkıntıların Coğrafi Anlamı",
+        "desc": "Türkiye'nin kıyı şeridi yalnızca basit bir çizgiden ibaret değildir; özellikle Ege ve Akdeniz kıyılarında koylar, körfezler, yarımadalar ve burunlar kıyı çizgisini son derece girintili-çıkıntılı hâle getirir. Bu durum, gerçek kıyı uzunluğunu harita üzerinde düz bir çizgiyle ölçülen mesafeden çok daha fazla yapar.",
+        "analysis": "Profesyonel coğrafi analizlerde, kıyı uzunluğu ve deniz derinlikleri; yüksek çözünürlüklü sayısal yükseklik modelleri (DEM), bathimetri verileri ve vektör tabanlı kıyı çokgenleri kullanılarak hesaplanır. Kıyıdaki her küçük girinti ve çıkıntı, poligonun çevre uzunluğunu artırır. Bu nedenle, 'Türkiye'nin kıyı uzunluğu kaç kilometredir?' sorusuna verilen cevap; kullanılan veri setinin çözünürlüğü, kıyı tanımına dahil edilen ada ve adacık sayısı ve ölçekteki genelleştirme düzeyine göre değişebilir.",
+        "center_note": "Aynı mantık, coğrafi merkez hesabı için de geçerlidir: kullanılan sınır verisinin çözünürlüğü, seçilen projeksiyon sistemi ve sayısal entegrasyon yöntemi, sonucu birkaç kilometreye kadar etkileyebilir. Bu sitede kullanılan yöntem; yüksek çözünürlüklü sınır verisi, alan koruyan projeksiyon ve alan-ağırlıklı centroid hesabı ile, bilimsel olarak tekrarlanabilir ve şeffaf bir çözüm sunmayı amaçlamaktadır."
+    },
+    "extremePoints": {
+        "north": "En Kuzey Nokta",
+        "north_location": "İnceburun / Sinop",
+        "north_desc": "Türkiye'nin en kuzey noktasıdır. Karadeniz kıyısında yer alır ve Avrupa kıtasının en kuzey kara noktalarından biri olarak kabul edilir.",
+        "south": "En Güney Nokta",
+        "south_location": "Topraktutan / Hatay",
+        "south_desc": "Türkiye'nin Suriye sınırındaki en güney kara noktasıdır. Asi Nehri vadisinin güneyinde, Amik Ovası ile Orta Doğu geçiş kuşağının kesişiminde yer alır.",
+        "east": "En Doğu Nokta",
+        "east_location": "Dilucu / Iğdır",
+        "east_desc": "Türkiye'nin Azerbaycan (Nahçıvan Özerk Cumhuriyeti) ve kısmen İran sınırına en yakın kara uzantılarından biridir. Kafkasya geçiş kapısı niteliğindedir.",
+        "west": "En Batı Nokta",
+        "west_location": "İpsala / Edirne",
+        "west_desc": "Türkiye'nin Yunanistan sınırındaki en batı kara noktalarından biridir. Meriç Nehri deltası ve Ege Denizi geçiş kuşağını temsil eder.",
+        "southeast": "Güneydoğu Uç Nokta",
+        "southeast_location": "Hakkari Dağları / Türkiye-İran-Irak Üçgeni",
+        "southeast_desc": "Türkiye'nin en dağlık ve sarp alanlarından biridir. Yüksek rakım, derin vadiler ve karasal iklimin hakim olduğu bu bölge, ülkenin en güneydoğu coğrafi uzantısını temsil eder.",
+        "northeast": "Kuzeydoğu Uç Nokta",
+        "northeast_location": "Ardahan / Posof Çevresi",
+        "northeast_desc": "Kafkasya'ya açılan kapı niteliğinde olan Ardahan, Türkiye'nin kuzeydoğu uç bölgesini oluşturur. Yüksek plato yüzeyleri, derin vadiler ve sert karasal iklim ile dikkat çeker.",
+        "southwest": "Güneybatı Uç Nokta",
+        "southwest_location": "Muğla Körfezleri (Gökova - Fethiye Arası)",
+        "southwest_desc": "Türkiye'nin Ege ve Akdeniz'in birleştiği güneybatı ucudur. Gökova, Hisarönü ve Fethiye körfezleri; kıta sahanlığı, koy-girinti çıkıntı yoğunluğu ve deniz derinlikleriyle Akdeniz havzasının en karmaşık kıyı morfolojilerinden birini sunar.",
+        "northwest": "Kuzeybatı Uç Nokta",
+        "northwest_location": "Kırklareli / Dereköy - Bulgaristan Sınırı",
+        "northwest_desc": "Türkiye'nin Bulgaristan sınırındaki kuzeybatı uç noktasıdır. Istranca Dağları'nın güney yamaçlarında yer alan bu bölge, Trakya'nın kuzey sınırını ve Balkan geçiş kuşağını temsil eder. Ormanlık alan ve engebeli arazi yapısıyla dikkat çeker.",
+        "showOnMap": "Haritada Göster"
+    },
+    "common": { "search": "Ara...", "locationInput": "Konumunuzu girin" },
+    "distance": { "useCurrent": "Konumumu Kullan", "calculate": "Mesafeyi Hesapla" },
+    "footer": {
+        "coordinates_value": "{{lat}}° {{latDir}}, {{lon}}° {{lonDir}}",
+        "title": "Türkiye'nin Tam Ortası",
+        "coordinates": "Koordinat: 39.245472° N, 35.487361° E",
+        "location": "Eşrefpaşa/Çandır, Yozgat",
+        "source": "Kaynak Kod",
+        "docs": "Dokümantasyon",
+        "contact": "İletişim",
+        "share": "Paylaş",
+        "copyright": "© 2025 Tüm hakları saklıdır. Veriler bilgilendirme amaçlıdır.",
+        "loading": "Yükleniyor...",
+        "analytics": "Analiz"
+    },
+    "sections": {
+        "extremePoints": "Türkiye'nin Coğrafi Uç Noktaları",
+        "methodology": "Hesaplama Metodolojisi",
+        "technical": "Teknik Detaylar",
+        "downloads": "İndirmeler",
+        "education": "Eğitim ve Öğrenme",
+        "credits": "Çalışma Bilgileri"
+    },
+    "messages": {
+        "zoomCenter": "Harita merkeze yakınlaştırıldı",
+        "showingTurkey": "Tüm Türkiye görüntüleniyor",
+        "coordCopied": "Koordinat panoya kopyalandı",
+        "linkCopied": "Sayfa linki kopyalandı",
+        "mapLinkCopied": "Harita linki kopyalandı",
+        "downloadingQR": "QR görüntüsü indiriliyor...",
+        "downloadingMap": "Harita görüntüsü indiriliyor...",
+        "error": "Bir hata oluştu"
+    },
+    "stats": {
+        "totalVisitors": "Toplam Ziyaretçi",
+        "todayVisitors": "Bugünkü Ziyaret",
+        "activeVisitors": "Şu Anda",
+        "pageViews": "Sayfa Görüntüleme"
+    },
+    "disclaimer": {
+        "important": "Önemli Not:",
+        "text": "Bu çalışma akademik bir çalışma olup, resmi bir belge değildir. Koordinatlar teknik nedenlerle değişiklik gösterebilir."
+    }
+}
+        </script>
+        <script type="application/json" id="i18n-en">
+{
+    "app": { "title": "Geographic Center of Turkey - Eşrefpaşa/Çandır, Yozgat" },
+    "nav": { "title": "Geographic Center of Turkey", "map": "Map", "more": "More", "summary": "Summary", "methodology": "Methodology", "downloads": "Downloads", "education": "Education", "about": "About", "distance": "Distance" },
+    "map": { "title": "Geographic Center of Turkey", "description": "Explore the center point with interactive map", "latitude": "Latitude", "longitude": "Longitude", "zoomToCenter": "Zoom to Center", "showTurkey": "Show All Turkey", "downloadScreenshot": "Download Map Screenshot" },
+    "summary": {
+        "title": "Summary",
+        "question": "Where is the exact center of Turkey? This study scientifically and reproducibly demonstrates that the coordinates 39.245472° N, 35.487361° E are the geographic center and exact center of Turkey by calculating the geometric centroid (area-weighted) over the boundaries of the Republic of Turkey (ADM0).",
+        "uncertainty": "This point is located near Eşrefpaşa/Çandır, Yozgat, and due to the dataset and projection system used, there is an uncertainty margin that may vary within a radius of approximately 3 km."
+    },
+    "credits": {
+        "author_label": "Prepared by",
+        "author": "Geographic Information Systems Expert",
+        "update_label": "Last Update",
+        "update_date": "8 December 2025",
+        "license_label": "License",
+        "license": "Creative Commons CC BY-SA 4.0",
+        "latitude": "39.245° N",
+        "lat_label": "Latitude",
+        "longitude": "35.487° E",
+        "lon_label": "Longitude",
+        "elevation": "~1250m",
+        "elev_label": "Elevation",
+        "extreme_count": "8 Points",
+        "extreme_label": "Extreme Points"
+    },
+    "methodology": {
+        "centroid": "Geometric Centroid",
+        "centroid_desc": "Mathematical method used to calculate the centroid of a polygon.",
+        "projection": "WGS84 Coordinate System",
+        "projection_desc": "Standard coordinate system used to define points on the Earth's surface.",
+        "analysis": "Numerical Analysis",
+        "analysis_desc": "Advanced mathematical calculations were used for precise results."
+    },
+    "technical": {
+        "software": "Software Used",
+        "software_list": "QGIS 3.28, Python, GDAL/OGR",
+        "datasource": "Data Source",
+        "data_source_name": "GADM - Global Administrative Areas (v4.1)",
+        "projection": "Projection",
+        "projection_name": "LAEA (Lambert Azimuthal Equal-Area)",
+        "projection_params": "+proj=laea +lat_0=39.245472 +lon_0=35.487361 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+        "coordinate_system": "Coordinate System",
+        "coordinate_system_name": "WGS84 (EPSG:4326)"
+    },
+    "download": {
+        "csv": "Coordinates (CSV)",
+        "csv_desc": "Geographic center coordinates of Turkey",
+        "pdf": "Report (PDF)",
+        "pdf_desc": "Calculation methodology and results",
+        "geojson": "Map (GeoJSON)",
+        "geojson_desc": "Geographic center point"
+    },
+    "education": {
+        "what": "What is Geographical Centroid Calculation?",
+        "what_desc": "The geographic center of a country or region is the point considered as the centroid of that area. In English literature, it is referred to as 'geographical center' or 'center of gravity of a polygon'. The method used on this site is based on calculating the area-weighted centroid of the polygon representing Turkey's borders.",
+        "goto_methodology": "Go to Methodology <i class='fas fa-arrow-right'></i>",
+        "how": "How is it calculated?",
+        "how_desc": "In summary; Turkey's borders are divided into small triangles/segments in a digital environment, the area and centroid of each segment are calculated, and then all segments are weighted to obtain a single average point. This process is performed using geographic information systems (GIS), projection transformations, and numerical integration techniques. Thus, a mathematically consistent answer to the question 'Where is the center of Turkey?' can be produced.",
+        "goto_extreme": "Explore extreme points <i class='fas fa-arrow-right'></i>"
+    },
+    "coast": {
+        "title": "Turkey's Coastline, Bays and Geographic Meaning of Indentations",
+        "desc": "Turkey's coastline is not just a simple line; especially on the Aegean and Mediterranean coasts, bays, gulfs, peninsulas, and capes make the coastline highly indented and protruding. This increases the actual coastline length far beyond the straight-line distance measured on a map.",
+        "analysis": "In professional geographic analysis, coastline length and sea depths are calculated using high-resolution digital elevation models (DEM), bathymetry data, and vector-based coastal polygons. Every small indentation and protrusion on the coast increases the polygon's perimeter. Therefore, the answer to 'How many kilometers is Turkey's coastline?' depends on the resolution of the dataset used, the number of islands included, and the level of generalization in the scale.",
+        "center_note": "The same logic applies to geographic center calculation: the resolution of the border data used, the chosen projection system, and the numerical integration method can affect the result by several kilometers. The method used on this site aims to provide a scientifically reproducible and transparent solution using high-resolution border data, area-preserving projection, and area-weighted centroid calculation."
+    },
+    "extremePoints": {
+        "north": "Northernmost Point",
+        "north_location": "İnceburun / Sinop",
+        "north_desc": "It is the northernmost point of Turkey. Located on the Black Sea coast, it is considered one of the northernmost land points of the European continent.",
+        "south": "Southernmost Point",
+        "south_location": "Topraktutan / Hatay",
+        "south_desc": "It is the southernmost land point of Turkey on the Syrian border. Located south of the Asi River valley, at the intersection of the Amik Plain and the Middle East transition zone.",
+        "east": "Easternmost Point",
+        "east_location": "Dilucu / Iğdır",
+        "east_desc": "It is one of the closest land extensions of Turkey to the Azerbaijan (Nakhchivan Autonomous Republic) and partly Iran border. It is the gateway to the Caucasus.",
+        "west": "Westernmost Point",
+        "west_location": "İpsala / Edirne",
+        "west_desc": "It is one of the westernmost land points of Turkey on the Greek border. Represents the Meriç River delta and the Aegean Sea transition zone.",
+        "southeast": "Southeast Extreme",
+        "southeast_location": "Hakkari Mountains / Turkey-Iran-Iraq Triangle",
+        "southeast_desc": "It is one of the most mountainous and rugged areas of Turkey. High altitude, deep valleys, and a continental climate dominate this region, representing the southeasternmost geographical extension of the country.",
+        "northeast": "Northeast Extreme",
+        "northeast_location": "Ardahan / Posof Area",
+        "northeast_desc": "Ardahan, which forms the northeastern tip of Turkey, is the gateway to the Caucasus. It is characterized by high plateau surfaces, deep valleys, and a harsh continental climate.",
+        "southwest": "Southwest Extreme",
+        "southwest_location": "Muğla Gulfs (Between Gökova - Fethiye)",
+        "southwest_desc": "It is the southwestern tip where the Aegean and Mediterranean meet. The gulfs of Gökova, Hisarönü, and Fethiye; with their continental shelf, high bay-cove density, and sea depths, offer one of the most complex coastal morphologies of the Mediterranean basin.",
+        "northwest": "Northwest Extreme",
+        "northwest_location": "Kırklareli / Dereköy - Bulgaria Border",
+        "northwest_desc": "It is the northwesternmost point of Turkey on the Bulgarian border. Located on the southern slopes of the Istranca Mountains, this region represents the northern border of Thrace and the Balkan transition zone. It is notable for its forested area and rugged terrain.",
+        "showOnMap": "Show on Map"
+    },
+    "common": { "search": "Search...", "locationInput": "Enter your location" },
+    "distance": { "useCurrent": "Use My Location", "calculate": "Calculate Distance" },
+    "footer": {
+        "coordinates_value": "{{lat}}° {{latDir}}, {{lon}}° {{lonDir}}",
+        "title": "Geographic Center of Turkey",
+        "coordinates": "Coordinate: 39.245472° N, 35.487361° E",
+        "location": "Eşrefpaşa/Çandır, Yozgat",
+        "source": "Source Code",
+        "docs": "Documentation",
+        "contact": "Contact",
+        "share": "Share",
+        "copyright": "© 2025 All rights reserved. Data is for informational purposes.",
+        "loading": "Loading...",
+        "analytics": "Analytics"
+    },
+    "sections": {
+        "extremePoints": "Geographic Extreme Points of Turkey",
+        "methodology": "Calculation Methodology",
+        "technical": "Technical Details",
+        "downloads": "Downloads",
+        "education": "Learning & Education",
+        "credits": "About This Work"
+    },
+    "messages": {
+        "zoomCenter": "Map zoomed to center",
+        "showingTurkey": "Showing all of Turkey",
+        "coordCopied": "Coordinate copied",
+        "linkCopied": "Link copied",
+        "mapLinkCopied": "Map link copied",
+        "downloadingQR": "Downloading QR image...",
+        "downloadingMap": "Downloading map image...",
+        "error": "An error occurred"
+    },
+    "stats": {
+        "totalVisitors": "Total Visitors",
+        "todayVisitors": "Today's Visits",
+        "activeVisitors": "Currently Active",
+        "pageViews": "Page Views"
+    },
+    "disclaimer": {
+        "important": "Important Note:",
+        "text": "This is an academic work and not an official document. Coordinates may change due to technical reasons."
+    }
+}
+        </script>
+    <script src="script.js"></script>
+    <script src="distance.js"></script>
+</body>
+</html>
